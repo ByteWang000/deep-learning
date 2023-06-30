@@ -5,7 +5,7 @@ import torch.nn.functional as F
 class LeNet(nn.Module):
     # 网络层结构
     def __init__(self):
-        super(LeNet, self).__init__()
+        super(LeNet, self).__init__()  # 子类继承父类时仍然需要调用父类方法，以确保父类的初始化逻辑或其它重要操作得以执行。
         self.conv1 = nn.Conv2d(3, 16, 5)  # （输入深度，输出深度，卷积核大小）
         self.poo1 = nn.MaxPool2d(2, 2)  # 池化核大小和步距
         self.conv2 = nn.Conv2d(16, 32, 5)
@@ -21,7 +21,7 @@ class LeNet(nn.Module):
         x = F.relu(self.conv2(x))
         x = self.poo2
         # view将其展平为一维向量，再送入全连接层，-1表示自动推理输入维度
-        x = F.view(-1.32 * 5 * 5)
+        x = F.view(-1, 32 * 5 * 5)
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.fc3
